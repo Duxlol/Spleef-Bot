@@ -58,6 +58,7 @@ def compare_images():
         if pos[0] != -1:
             mouse.click(Button.right, 1)
             compare_images()
+            webhook()
 
         else:
             sleep(0.5)
@@ -73,8 +74,7 @@ def webhook():
     url = config['CONFIG']['webhook']
     discord = Discord(url=url)
     # take screenshot
-    im1 = pag.screenshot('screen.png', region=(0, 0, 1920, 1080))
-    print("Screenshot taken")
+    pag.screenshot('screen.png', region=(0, 0, 1920, 1080))
 
     discord.post(file={
         "file1": open("screen.png", "rb"), }, )

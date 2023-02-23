@@ -68,7 +68,7 @@ def compare_images():
 
 def webhook():
     from discordwebhook import Discord
-    from configparser import ConfigParser, RawConfigParser
+    from configparser import RawConfigParser
     config = RawConfigParser()
     # load webhook url from config
     config.read('config.ini')

@@ -5,7 +5,6 @@ from time import sleep
 from pynput.mouse import Button, Controller as MouseController
 from pynput.keyboard import Key, Controller as KeyboardController
 import sys
-
 sys.setrecursionlimit(10000)
 keyboard = KeyboardController()
 mouse = MouseController()
@@ -15,13 +14,13 @@ inventory = Image.open('./screenshots/inventory.png')
 
 
 def requeue():
-    # print("RE QUEUEING")
+    #print("RE QUEUEING")
     while True:
         pos = imagesearch('./screenshots/paper.png')
         if pos[0] != -1:
             mouse.click(Button.right, 1)
             sleep(1)
-            # print(pos)
+            #print(pos)
             game_start()
             break
         else:
@@ -29,7 +28,7 @@ def requeue():
 
 
 def join_game():
-    # print('Player status: Joining Game')
+    #print('Player status: Joining Game')
     # joins game from lobby
     join = imagesearch('./screenshots/lobby.png')
     if join[0] != -1:
@@ -48,7 +47,7 @@ def join_game():
 
 
 def death():
-    # print("STARTING DEATH FUNCTION")
+    #print("STARTING DEATH FUNCTION")
     width, height = pag.size()
     for i in range(11):
         pag.click(width / 2, height)
@@ -56,7 +55,7 @@ def death():
 
 
 def compare_images():
-    # print("COMPARING IMAGES")
+    #print("COMPARING IMAGES")
     pag.screenshot('./screenshots/hotbar.png', region=(786, 1005, 29, 30))
     hotbar = Image.open('./screenshots/hotbar.png')
     # Compare the pixel values of the two images
@@ -72,21 +71,21 @@ def compare_images():
 
     # Check if the images are the same for at least 60% of the pixels, or if they are exactly the same
     if percentage_identical >= 35 or hotbar.tobytes() == inventory.tobytes():
-        # print('Status Player: Lobby')
+        #print('Status Player: Lobby')
         join_game()
 
     else:
-        # print('Status player: In-Game')
+        #print('Status player: In-Game')
         game_start()
 
 
 def game_start():
     # checks for game start
-    # print("CHECKING FOR GAME START")
+    #print("CHECKING FOR GAME START")
     pos = imagesearch('./screenshots/start.png')
     pos2 = imagesearch('./screenshots/start2.png')
     if pos[0] != -1 or pos2[0] != -1:
-        # print('game has started')
+        #print('game has started')
         sleep(0.3)
         death()
     else:

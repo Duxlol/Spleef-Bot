@@ -3,18 +3,23 @@ import pyautogui as pag
 from time import sleep
 from python_imagesearch.imagesearch import imagesearch
 from pynput.mouse import Button, Controller as MouseController
-
+from pynput.keyboard import Key, Controller as KeyboardController
+import sys
+sys.setrecursionlimit(10000)
 mouse = MouseController()
+keyboard = KeyboardController()
 
 lobby = Image.open('./screenshots/lobby.png')
 inventory = Image.open('./screenshots/inventory.png')
 
 
 def join_game():
-    print('Player status: Joining Game')
+    #print('Player status: Joining Game')
     # joins game from lobby
     join = imagesearch('./screenshots/lobby.png')
     if join[0] != -1:
+        keyboard.press('1')
+        keyboard.release('1')
         pag.rightClick()
         sleep(0.5)
         pag.moveTo(889, 450)
@@ -28,7 +33,7 @@ def join_game():
 
 
 def compare_images():
-    pag.screenshot('./screenshots/hotbar.png', region=(786, 1005, 29, 30))
+    pag.screenshot('./screenshots/hotbar.png', region=(786, 1044, 29, 30))
     hotbar = Image.open('./screenshots/hotbar.png')
     # Compare the pixel values of the two images
     pixels1 = hotbar.load()
@@ -43,13 +48,19 @@ def compare_images():
 
     # Check if the images are the same for at least 60% of the pixels, or if they are exactly the same
     if percentage_identical >= 35 or hotbar.tobytes() == inventory.tobytes():
-        print('Status Player: Lobby')
+        #print('Status Player: Lobby')
         join_game()
 
     else:
-        print('Status player: In-Game')
+        #print('Status player: In-Game')
         pos = imagesearch('./screenshots/paper.png')
         if pos[0] != -1:
             mouse.click(Button.right, 1)
-        else:
             compare_images()
+        else:
+            sleep(0.5)
+            compare_images()
+
+
+sleep(2)
+compare_images()

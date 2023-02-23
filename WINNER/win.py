@@ -1,5 +1,7 @@
 from PIL import Image
 import pyautogui as pag
+from time import sleep
+from python_imagesearch.imagesearch import imagesearch
 from pynput.mouse import Button, Controller as MouseController
 
 mouse = MouseController()
@@ -12,6 +14,20 @@ inventory = Image.open('./screenshots/inventory.png')
 
 def join_game():
     print('Player status: Joining Game')
+    # joins game from lobby
+    join = imagesearch('./screenshots/lobby.png')
+    if join[0] != -1:
+        pag.rightClick()
+        sleep(0.5)
+        pag.moveTo(889, 450)
+        sleep(0.5)
+        pag.leftClick()
+        pag.moveTo(1036, 484)
+        sleep(0.5)
+        pag.leftClick()
+        sleep(1)
+        compare_images()
+
 
 def compare_images():
     # Compare the pixel values of the two images

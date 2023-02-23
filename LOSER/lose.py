@@ -2,14 +2,13 @@ from PIL import Image
 import pyautogui as pag
 from python_imagesearch.imagesearch import imagesearch
 import time
+from time import sleep
 from pynput.mouse import Button, Controller as MouseController
 from pynput.keyboard import Key, Controller as KeyboardController
 
 keyboard = KeyboardController()
 mouse = MouseController()
 
-pag.screenshot('./screenshots/hotbar.png', region=(305, 369, 29, 30))
-hotbar = Image.open('./screenshots/hotbar.png')
 lobby = Image.open('./screenshots/lobby.png')
 inventory = Image.open('./screenshots/inventory.png')
 
@@ -26,9 +25,19 @@ def requeue():
 
 def join_game():
     print('Player status: Joining Game')
-    # TODO: add join game features
     # joins game from lobby
-
+    join = imagesearch('./screenshots/lobby.png')
+    if join[0] != -1:
+        pag.rightClick()
+        sleep(0.5)
+        pag.moveTo(889, 450)
+        sleep(0.5)
+        pag.leftClick()
+        pag.moveTo(1036, 484)
+        sleep(0.5)
+        pag.leftClick()
+        sleep(1)
+        game_start()
 
 
 def death():
@@ -36,12 +45,14 @@ def death():
     width, height = pag.size()
     for i in range(8):
         pag.click(width / 2, height)
-    time.sleep(2) # waiting for paper to pop up
+    time.sleep(2)  # waiting for paper to pop up
     requeue()
 
 
 def compare_images():
     print("COMPARING IMAGES")
+    pag.screenshot('./screenshots/hotbar.png', region=(786, 1005, 29, 30))
+    hotbar = Image.open('./screenshots/hotbar.png')
     # Compare the pixel values of the two images
     pixels1 = hotbar.load()
     pixels2 = lobby.load()
@@ -73,6 +84,7 @@ def game_start():
     else:
         time.sleep(2)
         compare_images()
+
 
 time.sleep(2)
 compare_images()

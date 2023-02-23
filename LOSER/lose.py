@@ -28,7 +28,7 @@ def join_game():
     print('Player status: Joining Game')
     # TODO: add join game features
     # joins game from lobby
-    death()
+
 
 
 def death():
@@ -64,7 +64,6 @@ def compare_images():
 
 
 def game_start():
-    # TODO: check for game start
     # checks for game start
     print("CHECKING FOR GAME START")
     pos = imagesearch('./screenshots/start.png')

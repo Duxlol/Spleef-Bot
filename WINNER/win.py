@@ -13,7 +13,6 @@ inventory = Image.open('./screenshots/inventory.png')
 def join_game():
     print('Player status: Joining Game')
 
-
 def compare_images():
     # Compare the pixel values of the two images
     pixels1 = hotbar.load()

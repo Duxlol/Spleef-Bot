@@ -2,6 +2,11 @@ from PIL import Image
 import pyautogui as pag
 from python_imagesearch.imagesearch import imagesearch
 import time
+from pynput.mouse import Button, Controller as MouseController
+from pynput.keyboard import Key, Controller as KeyboardController
+
+keyboard = KeyboardController()
+mouse = MouseController()
 
 pag.screenshot('./screenshots/hotbar.png', region=(305, 369, 29, 30))
 hotbar = Image.open('./screenshots/hotbar.png')
@@ -10,9 +15,12 @@ inventory = Image.open('./screenshots/inventory.png')
 
 
 def requeue():
+    print("REQUEUEING")
     # TODO: requeue (click paper)
     # if paper is in inventory, right click
     # if ...: pag.click(button='right')
+    mouse.click(Button.right, 1)
+    time.sleep(2)
     game_start()
 
 
@@ -24,13 +32,16 @@ def join_game():
 
 
 def death():
+    print("STARTING DEATH FUNCTION")
     width, height = pag.size()
     for i in range(8):
         pag.click(width / 2, height)
+    time.sleep(2) # waiting for paper to pop up
     requeue()
 
 
 def compare_images():
+    print("COMPARING IMAGES")
     # Compare the pixel values of the two images
     pixels1 = hotbar.load()
     pixels2 = lobby.load()
@@ -55,10 +66,14 @@ def compare_images():
 def game_start():
     # TODO: check for game start
     # checks for game start
-    pos = imagesearch('...')
+    print("CHECKING FOR GAME START")
+    pos = imagesearch('./screenshots/start.png')
     if pos[0] != -1:
         print('game has started')
         death()
     else:
         time.sleep(2)
         compare_images()
+
+time.sleep(2)
+compare_images()

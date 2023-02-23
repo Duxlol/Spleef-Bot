@@ -1,6 +1,8 @@
 from PIL import Image
 import pyautogui as pag
-from game import playing
+from pynput.mouse import Button, Controller as MouseController
+
+mouse = MouseController()
 
 pag.screenshot('./screenshots/hotbar.png', region=(305, 369, 29, 30))
 hotbar = Image.open('./screenshots/hotbar.png')
@@ -32,3 +34,8 @@ def compare_images():
     else:
         print('Status player: In-Game')
         # TODO: check for start of game and right click paper
+        pos = imagesearch('./screenshots/paper.png')
+        if pos[0] != -1:
+            mouse.click(Button.right, 1)
+        else:
+            compare_images()

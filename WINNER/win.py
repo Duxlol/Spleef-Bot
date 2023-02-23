@@ -6,8 +6,6 @@ from pynput.mouse import Button, Controller as MouseController
 
 mouse = MouseController()
 
-pag.screenshot('./screenshots/hotbar.png', region=(305, 369, 29, 30))
-hotbar = Image.open('./screenshots/hotbar.png')
 lobby = Image.open('./screenshots/lobby.png')
 inventory = Image.open('./screenshots/inventory.png')
 
@@ -30,6 +28,8 @@ def join_game():
 
 
 def compare_images():
+    pag.screenshot('./screenshots/hotbar.png', region=(786, 1005, 29, 30))
+    hotbar = Image.open('./screenshots/hotbar.png')
     # Compare the pixel values of the two images
     pixels1 = hotbar.load()
     pixels2 = lobby.load()

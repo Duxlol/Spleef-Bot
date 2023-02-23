@@ -14,8 +14,7 @@ inventory = Image.open('./screenshots/inventory.png')
 
 
 def requeue():
-    print("REQUEUEING")
-    # TODO: requeue (click paper)
+    print("RE QUEUEING")
     # if paper is in inventory, right click
     # if ...: pag.click(button='right')
     mouse.click(Button.right, 1)

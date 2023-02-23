@@ -48,7 +48,6 @@ def compare_images():
 
     else:
         print('Status player: In-Game')
-        # TODO: check for start of game and right click paper
         pos = imagesearch('./screenshots/paper.png')
         if pos[0] != -1:
             mouse.click(Button.right, 1)

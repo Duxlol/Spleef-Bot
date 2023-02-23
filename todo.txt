@@ -1,14 +1,16 @@
-1. check if player is in lobby ( BOTH ) [compare_images]
-2. join game at same time ( BOTH ) ( ONCE ) [join_game]
-    - right click iron sword (unranked queues title)
-    - go to solos, diamond sword
-    - go to spleef, diamond shovel (1035, 492)
-3. check when game starts ( BOTH )
-    - check for messages in chat or things on screen. OR wait 5~ seconds
-4. right click PAPER item to join new game, at the same time
-    - winner: only requeue
-    - loser: mine down block underneath and requeue
+[DONE]
+// 1. check if player is in lobby ( BOTH ) [compare_images]
+// 2. join game at same time ( BOTH ) ( ONCE ) [join_game]
+//    - right click iron sword (unranked queues title)
+//    - go to solos, diamond sword
+//    - go to spleef, diamond shovel (1035, 492)
+// 3. check when game starts ( BOTH )
+//    - check for messages in chat or things on screen. OR wait 5~ seconds
+// 4. right click PAPER item to join new game, at the same time
+//    - winner: only requeue
+//     - loser: mine down block underneath and requeue
 
+[TO-DO]
 FAILSAFES:
 - home screen
 - multiplayer screen
@@ -20,8 +22,8 @@ FAILSAFES:
 - check if its in queue
 (optional: send alert to discord)
 
-
-1. compare images
+[OTHER SYSTEM IMPLEMENTED]
+compare images
     - lobby: join game -> death -> requeue -> check for game start -> death
     - in-game: check for start game ->  true: death -> requeue -> (check for game start)
                                         false: 2 sec -> compare images

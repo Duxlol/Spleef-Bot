@@ -34,35 +34,36 @@ def join_game():
 
 
 def compare_images():
-    pag.screenshot('./screenshots/hotbar.png', region=(786, 1044, 29, 30))
-    hotbar = Image.open('./screenshots/hotbar.png')
-    # Compare the pixel values of the two images
-    pixels1 = hotbar.load()
-    pixels2 = lobby.load()
-    pixels = hotbar.size[0] * hotbar.size[1]
-    identical_pixels = 0
-    for i in range(hotbar.size[0]):
-        for j in range(hotbar.size[1]):
-            if pixels1[i, j] == pixels2[i, j]:
-                identical_pixels += 1
-    percentage_identical = identical_pixels / pixels * 100
+    while True:
+        pag.screenshot('./screenshots/hotbar.png', region=(786, 1044, 29, 30))
+        hotbar = Image.open('./screenshots/hotbar.png')
+        # Compare the pixel values of the two images
+        pixels1 = hotbar.load()
+        pixels2 = lobby.load()
+        pixels = hotbar.size[0] * hotbar.size[1]
+        identical_pixels = 0
+        for i in range(hotbar.size[0]):
+            for j in range(hotbar.size[1]):
+                if pixels1[i, j] == pixels2[i, j]:
+                    identical_pixels += 1
+        percentage_identical = identical_pixels / pixels * 100
 
-    # Check if the images are the same for at least 60% of the pixels, or if they are exactly the same
-    if percentage_identical >= 35 or hotbar.tobytes() == inventory.tobytes():
-        # print('Status Player: Lobby')
-        join_game()
-
-    else:
-        # print('Status player: In-Game')
-        pos = imagesearch('./screenshots/paper.png')
-        if pos[0] != -1:
-            mouse.click(Button.right, 1)
-            compare_images()
-            webhook()
+        # Check if the images are the same for at least 60% of the pixels, or if they are exactly the same
+        if percentage_identical >= 35 or hotbar.tobytes() == inventory.tobytes():
+            # print('Status Player: Lobby')
+            join_game()
+            break
 
         else:
-            sleep(0.5)
-            compare_images()
+            # print('Status player: In-Game')
+            pos = imagesearch('./screenshots/paper.png')
+            if pos[0] != -1:
+                mouse.click(Button.right, 1)
+                webhook()
+                continue
+            else:
+                sleep(0.5)
+                continue
 
 
 def webhook():
